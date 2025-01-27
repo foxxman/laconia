@@ -1,0 +1,19 @@
+version: "3"
+services:
+  core:
+    build:
+      context: ../../services
+      dockerfile: ../Dockerfile
+      target: run_local
+      args:
+        - SERVICE_DIR=core
+    restart: always
+    volumes:
+      - ../../services/core:/home/web/code/core
+      - /home/web/code/node_modules
+      - /home/web/code/core/node_modules
+    environment:
+      - BASE_URL=http://localhost:3000
+      - IS_PROD=0
+    ports:
+      - 3000:3000

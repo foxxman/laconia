@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "services/core"
+    ]
+  },
+  "devDependencies": {
+    "husky": "9.1.4"
+  },
+  "scripts": {
+    "postinstall": "cd ./services && yarn",
+    "build": "yarn workspaces -A run build",
+    "start:local": "docker-compose --compatibility -p laconia -f deploy/local/docker-compose.yml up --force-recreate --build -d",
+    "docker:down": "docker ps -a --filter 'name=laconia_' -q | xargs docker rm -f && docker rmi laconia_core"
+  }
+}
